@@ -1,4 +1,4 @@
-# STM32L4-ECG
+# STM32L4-AD8282-ECG
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](/LICENSE)
 ![MCU](https://img.shields.io/badge/MCU-STM32L476-blue)
@@ -26,23 +26,23 @@
 | LA | Electrode | Left arm |
 | RL | Electrode | Right leg (reference) |
 
-### Mermaid diagram (renders on GitHub)
+### Wiring Diagram (Mermaid)
 
 ```mermaid
 flowchart LR
-  subgraph AD8232 Module
+  subgraph AD8232_Module [AD8232 Module]
     V33[3V3]
     GNDm[GND]
     OUT[OUTPUT]
     SDN[SDN̅]
     LOplus[LO+]
-    LOminus[LO-]
-    RA[RA electrode]
-    LA[LA electrode]
-    RL[RL electrode]
+    LOminus[LO−]
+    RA_IN[RA]
+    LA_IN[LA]
+    RL_IN[RL]
   end
 
-  subgraph STM32L476G-DISCO
+  subgraph STM32L476G_DISCO [STM32L476G-DISCO]
     V3[3V3]
     GNDs[GND]
     PA0[PA0 / ADC1_IN5]
@@ -53,15 +53,20 @@ flowchart LR
     PD6[PD6 / USART2_RX]
   end
 
+  %% Power & ground
   V33 --- V3
   GNDm --- GNDs
+
+  %% Signal wiring
   OUT --> PA0
   SDN --> PA1
   LOplus --> PB0
   LOminus --> PB1
 
-  RA -. electrode .- RA
-  LA -. electrode .- LA
-  RL -. electrode .- RL
+  %% UART to PC
+  PD5 -->|UART 115200 8N1| PC[PC Serial RX]
 
-  note over PD5: UART 115200 8N1 → PC RX
+  %% Electrodes
+  RA_E[Right Arm Electrode] --- RA_IN
+  LA_E[Left Arm Electrode]  --- LA_IN
+  RL_E[Right Leg Electrode] --- RL_IN
