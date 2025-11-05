@@ -1,0 +1,22 @@
+# STM32CubeIDE build files
+/Debug/
+/Release/
+/.build/
+/.project
+/.settings/
+/.cproject
+
+# Temporary files
+*.launch
+*.swp
+*.bak
+*.tmp
+
+# Object and binary files
+*.o
+*.elf
+*.map
+*.bin
+*.hex
+*.list
+*.srec
