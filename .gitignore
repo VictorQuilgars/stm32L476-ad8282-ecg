@@ -1,22 +1,101 @@
-# STM32CubeIDE build files
-/Debug/
-/Release/
-/.build/
-/.project
-/.settings/
-/.cproject
-
-# Temporary files
-*.launch
-*.swp
-*.bak
+# ===============================
+# GLOBAL IGNORE RULES
+# ===============================
+.DS_Store
+Thumbs.db
 *.tmp
+*.log
+*.bak
+*.swp
+*.user
+*.suo
+*.lnk
+*.orig
 
-# Object and binary files
-*.o
-*.elf
-*.map
-*.bin
-*.hex
-*.list
-*.srec
+# VSCode
+.vscode/
+.history/
+
+# ===============================
+# STM32 (CubeIDE / HAL / Build)
+# ===============================
+# Build outputs
+stm32-ecg/Debug/
+stm32-ecg/Release/
+stm32-ecg/.settings/
+stm32-ecg/.metadata/
+stm32-ecg/.mxproject
+stm32-ecg/*.launch
+
+# CubeIDE project workspace cache
+stm32-ecg/.cproject
+stm32-ecg/.project
+stm32-ecg/*.ioc-backup
+stm32-ecg/.stm32cubeide/
+stm32-ecg/build/
+stm32-ecg/out/
+
+# Generated binaries
+stm32-ecg/*.elf
+stm32-ecg/*.bin
+stm32-ecg/*.hex
+stm32-ecg/*.map
+stm32-ecg/*.list
+
+# ===============================
+# ESP32 (PlatformIO)
+# ===============================
+esp32-visualizer/.pio/
+esp32-visualizer/.pioenvs/
+esp32-visualizer/.piolibdeps/
+esp32-visualizer/.clangd/
+esp32-visualizer/.cache/
+esp32-visualizer/.env/
+esp32-visualizer/.idea/
+esp32-visualizer/.vscode/
+esp32-visualizer/.travis.yml
+esp32-visualizer/.clang-format
+esp32-visualizer/.clang-tidy
+
+# Build artifacts
+esp32-visualizer/.pio/build/
+esp32-visualizer/.pio/libdeps/
+esp32-visualizer/.pio/package-cache/
+esp32-visualizer/.pioenvs/
+esp32-visualizer/.pioinit/
+esp32-visualizer/build/
+
+# Auto-generated firmware
+esp32-visualizer/firmware.bin
+esp32-visualizer/firmware.elf
+esp32-visualizer/firmware.map
+
+# ===============================
+# Python virtual environments (if used)
+# ===============================
+venv/
+.env/
+__pycache__/
+*.pyc
+*.pyo
+
+# ===============================
+# OS-Specific
+# ===============================
+# macOS
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+ehthumbs.db
+Desktop.ini
+
+# ===============================
+# GIT KEEP
+# ===============================
+# (If you want to keep empty dirs)
+!.gitkeep
