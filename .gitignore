@@ -20,27 +20,27 @@ Thumbs.db
 # STM32 (CubeIDE / HAL / Build)
 # ===============================
 # Build outputs
-stm32-ecg/Debug/
-stm32-ecg/Release/
-stm32-ecg/.settings/
-stm32-ecg/.metadata/
-stm32-ecg/.mxproject
-stm32-ecg/*.launch
+stm32L476g-ecg/Debug/
+stm32L476g-ecg/Release/
+stm32L476g-ecg/.settings/
+stm32L476g-ecg/.metadata/
+stm32L476g-ecg/.mxproject
+stm32L476g-ecg/*.launch
 
 # CubeIDE project workspace cache
-stm32-ecg/.cproject
-stm32-ecg/.project
-stm32-ecg/*.ioc-backup
-stm32-ecg/.stm32cubeide/
-stm32-ecg/build/
-stm32-ecg/out/
+stm32L476g-ecg/.cproject
+stm32L476g-ecg/.project
+stm32L476g-ecg/*.ioc-backup
+stm32L476g-ecg/.stm32cubeide/
+stm32L476g-ecg/build/
+stm32L476g-ecg/out/
 
 # Generated binaries
-stm32-ecg/*.elf
-stm32-ecg/*.bin
-stm32-ecg/*.hex
-stm32-ecg/*.map
-stm32-ecg/*.list
+stm32L476g-ecg/*.elf
+stm32L476g-ecg/*.bin
+stm32L476g-ecg/*.hex
+stm32L476g-ecg/*.map
+stm32L476g-ecg/*.list
 
 # ===============================
 # ESP32 (PlatformIO)

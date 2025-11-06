@@ -102,8 +102,15 @@ int main(void)
   // Active le module (SDN̅ = HIGH sur PA1)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
 
-  const char *msg = "Start ECG acquisition @250Hz\r\n";
-  HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), 100);
+  // Attente du bouton sur PE8 (actif bas)
+  HAL_UART_Transmit(&huart2, (uint8_t*)"Press button to start...\r\n", 26, 100);
+  while (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_8) == GPIO_PIN_SET) {
+      HAL_Delay(10); // bouton relâché => attente
+  }
+  HAL_UART_Transmit(&huart2, (uint8_t*)"Starting ECG...\r\n", 17, 100);
+
+  // (Optionnel) petit délai pour éviter un rebond
+  HAL_Delay(100);
 
   // Cadence exacte 250 Hz selon clocks réelles
   g_fs_real = TIM6_SetRate(250);
@@ -338,6 +345,7 @@ static void MX_GPIO_Init(void)
 {
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
 
   GPIO_InitTypeDef g = {0};
 
@@ -367,6 +375,14 @@ static void MX_GPIO_Init(void)
   g.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
   g.Alternate = GPIO_AF7_USART2;
   HAL_GPIO_Init(GPIOA, &g);
+
+  /* === Bouton externe sur PE8 === */
+
+  GPIO_InitTypeDef g_btn = {0};
+  g_btn.Pin = GPIO_PIN_8;
+  g_btn.Mode = GPIO_MODE_INPUT;
+  g_btn.Pull = GPIO_PULLUP; // pull-up interne activé
+  HAL_GPIO_Init(GPIOE, &g_btn);
 }
 
 /* ---------- System Clock ---------- */
