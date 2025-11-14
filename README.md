@@ -36,35 +36,35 @@ Electrodes -> AD8232 -> STM32L476G (ADC + DSP) -> UART -> ESP32 (Wi-Fi/BLE) -> W
 
 ### Bill of Materials
 
-- STM32L476G-DISCO development board  
-- ESP32 development board (for example ESP32-WROOM-32 devkit)  
-- AD8232 ECG module with electrode leads  
-- Three single-lead ECG electrodes (RA, LA, RL)  
-- USB cables, Dupont jumpers, and a stable 3.3 V supply (if not powered by USB)  
+- STM32L476G-DISCO development board
+- ESP32 development board (for example ESP32-WROOM-32 devkit)
+- AD8232 ECG module with electrode leads
+- Three single-lead ECG electrodes (RA, LA, RL)
+- USB cables, Dupont jumpers, and a stable 3.3 V supply (if not powered by USB)
 - Optional: Shielded cables, decoupling capacitors, enclosure
 
 ### Quick Wiring Reference (AD8232 <-> STM32L476G-DISCO)
 
-| AD8232 pin | STM32 pin | Function |
-|---|---|---|
-| 3V3 | 3V3 | Power |
-| GND | GND | Reference ground |
-| OUTPUT | **PA0 (ADC1_IN5)** | ECG analog output |
-| SDN (active low) | **PA1 (GPIO OUT, drive HIGH)** | Enable or shutdown |
-| LO+ | **PB0 (GPIO IN)** | Lead-off positive (optional) |
-| LO- | **PB1 (GPIO IN)** | Lead-off negative (optional) |
-| RA | Electrode | Right arm |
-| LA | Electrode | Left arm |
-| RL | Electrode | Right leg (reference) |
+| AD8232 pin       | STM32 pin                      | Function                     |
+| ---------------- | ------------------------------ | ---------------------------- |
+| 3V3              | 3V3                            | Power                        |
+| GND              | GND                            | Reference ground             |
+| OUTPUT           | **PA0 (ADC1_IN5)**             | ECG analog output            |
+| SDN (active low) | **PA1 (GPIO OUT, drive HIGH)** | Enable or shutdown           |
+| LO+              | **PB0 (GPIO IN)**              | Lead-off positive (optional) |
+| LO-              | **PB1 (GPIO IN)**              | Lead-off negative (optional) |
+| RA               | Electrode                      | Right arm                    |
+| LA               | Electrode                      | Left arm                     |
+| RL               | Electrode                      | Right leg (reference)        |
 
 ### STM32 <-> ESP32 UART Link
 
-| Signal | STM32 pin | ESP32 pin (example) | Notes |
-|---|---|---|---|
-| UART TX | PA2 (USART2_TX or PD5 on ST-Link VCP) | GPIO16 (RX2) | Serial data from STM32 |
-| UART RX | PA3 (USART2_RX or PD6 on ST-Link VCP) | GPIO17 (TX2) | Optional for acknowledgements |
-| 3V3 | 3V3 | 3V3 | Ensure current budget is sufficient |
-| GND | GND | GND | Common ground, keep runs short |
+| Signal  | STM32 pin                             | ESP32 pin (example) | Notes                               |
+| ------- | ------------------------------------- | ------------------- | ----------------------------------- |
+| UART TX | PA2 (USART2_TX or PD5 on ST-Link VCP) | GPIO16 (RX2)        | Serial data from STM32              |
+| UART RX | PA3 (USART2_RX or PD6 on ST-Link VCP) | GPIO17 (TX2)        | Optional for acknowledgements       |
+| 3V3     | 3V3                                   | 3V3                 | Ensure current budget is sufficient |
+| GND     | GND                                   | GND                 | Common ground, keep runs short      |
 
 ### Data Path Diagram
 
@@ -150,17 +150,20 @@ flowchart LR
 ## Getting Started
 
 1. **Assemble the hardware**
+
    - Attach electrodes (RA, LA, RL) to the subject.
    - Double-check the AD8232 wiring to the STM32 and the UART link to the ESP32.
    - Power the system from a stable 3.3 V source (USB for development is acceptable).
 
 2. **Build and flash the STM32 firmware**
+
    - Open `stm32L476g-ecg/L4-ECG.ioc` in STM32CubeIDE.
    - Generate code if required, then build the project.
    - Connect the STM32L476G-DISCO via USB and flash the binary.
    - Use the integrated virtual COM port to verify UART output with a serial console.
 
 3. **Build and flash the ESP32 firmware**
+
    - Install PlatformIO if not already available.
    - From `esp32-visualizer/`, run `pio run` to build and `pio run -t upload` to flash.
    - Monitor serial output (`pio device monitor`) to confirm sample reception.
@@ -194,8 +197,8 @@ flowchart LR
 
 ## Credits
 
-- **Author**: Victor  
-- **Contact**: victor@example.com  
+- **Author**: Victor Quilgars
+- **Contact**: vquilgars@icloud.com
 - **License**: MIT License (see `/LICENSE` if present)
 
 Feel free to open issues or submit pull requests to improve the hardware design, firmware, or visualization experience.

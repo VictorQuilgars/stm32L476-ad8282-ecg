@@ -3,18 +3,16 @@
 #include <stdio.h>
 #include "ecg_proc.h"
 
-/* ---------- Handles ---------- */
 ADC_HandleTypeDef  hadc1;
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef  htim6;
 DMA_HandleTypeDef  hdma_adc1;
 
-/* ---------- Buffers & counters ---------- */
 #define ADC_BUF_LEN 250
 uint16_t adc_buf[ADC_BUF_LEN];
 
 volatile uint32_t g_samples_total = 0;
-static uint32_t   g_fs_real = 0;     // cadence réelle fixée par TIM6_SetRate()
+static uint32_t   g_fs_real = 0;
 static uint32_t   g_leads_on_ms = 0; // timestamp de la dernière transition LEADS ON
 
 /* ---------- Protos ---------- */
@@ -27,8 +25,8 @@ static void MX_USART2_UART_Init(void);
 
 static void uart_cb(const ecg_sample_out_t* s, void* user);
 
-/* ---------- Helper: set TIM6 to target rate (auto PSC/ARR) ---------- */
-/* Retourne la cadence réellement atteinte (en Hz) */
+
+/* Retourne la cadence atteinte (en Hz) */
 static uint32_t TIM6_SetRate(uint32_t fs_hz)
 {
     // Fréquence horloge du timer (TIM6 sur APB1)
@@ -109,7 +107,6 @@ int main(void)
   }
   HAL_UART_Transmit(&huart2, (uint8_t*)"Starting ECG...\r\n", 17, 100);
 
-  // (Optionnel) petit délai pour éviter un rebond
   HAL_Delay(100);
 
   // Cadence exacte 250 Hz selon clocks réelles
